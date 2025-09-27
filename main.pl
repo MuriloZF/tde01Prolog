@@ -117,3 +117,33 @@ iniciar :-
     write('Ranking completo:'), nl,
     ranking(R),
     write(R), nl.
+
+
+
+perfil_teste(1, [big_data-s,hadoop-n,estatistica-s,redes-n,criptografia-n,firewall-n,
+          interface-n,sites-n,banco_de_dados-n,machine_learning-s,
+          redes_neurais-s,linguagem_natural-n,lideranca-n,governanca-n,gestao_projetos-n]).
+
+perfil_teste(2, [big_data-n,hadoop-n,estatistica-n,redes-s,criptografia-s,firewall-s,
+          interface-n,sites-n,banco_de_dados-n,machine_learning-n,
+          redes_neurais-n,linguagem_natural-n,lideranca-n,governanca-n,gestao_projetos-n]).
+
+perfil_teste(3, [big_data-n,hadoop-n,estatistica-n,redes-n,criptografia-n,firewall-n,
+          interface-s,sites-s,banco_de_dados-s,machine_learning-n,
+          redes_neurais-n,linguagem_natural-n,lideranca-s,governanca-n,gestao_projetos-n]).
+
+
+rodar_teste(Id) :-
+    retractall(resposta(_,_)),
+    perfil_teste(Id, Lista),
+    forall(member(C-R, Lista), assertz(resposta(C,R))),
+    melhor(Todas),
+    nl, write('Teste '), write(Id), write(' -> Trilhas recomendadas:'), nl,
+    forall(member(T-D, Todas), (
+        write('- '), write(T), write(': '), write(D), nl,
+        justificativa(T), nl
+    )),
+    write('Ranking completo:'), nl,
+    ranking(R), write(R), nl.
+
+
