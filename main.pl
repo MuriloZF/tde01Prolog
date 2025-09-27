@@ -1,3 +1,8 @@
+:- use_module(base_conhecimento).
+:- use_module(perfil_teste1).
+:- use_module(perfil_teste2).
+:- use_module(perfil_teste3).
+
 :- dynamic resposta/2. % predicado resposta/2 sera dinamico (pode ser modificado durante execucao) por exemplo o assertz e retract.
 
 ler_resposta(Resp) :- % le um valor digitado que seria resposta e verifica se for s ou n se for ele corta com o "!" e uni Resp = Raw.
@@ -49,31 +54,23 @@ ranking(ListaRanking) :-
     keysort(Pares, Ordenados), % ai ordena pela pontuacao
     reverse(Ordenados, ListaRanking). % inverte para decrescente e retorna todas no ranking
 
-
-
-iniciar  :-
-	write('Programa iniciando...'), nl,
-	write('Lendo as perguntas..'), nl,
-    	(ler_perguntas ->
-	(write('Perguntas lidas com sucesso:'), nl)
-    ;   
-    	(write('Falha ao ler as perguntas'), nl)
-    ),
-	write('Iniciando o questionário...'), nl,
-	faz_perguntas,
-	write('Calculando resultado...'), nl,
-	calcula_resultado,
-	write('Resultado:'), nl,
-	exibe_resultado.
-
-ler_perguntas :-
-	write('Perguntas:'), nl.
-
-faz_perguntas :-
-	write('Pergunta 1:'), nl.
-
-calcula_resultado :-
-	write('Calculo dos resultados:'), nl.
-
-exibe_resultado :-
-	write('Exibindo resultaado:'), nl.
+iniciar :-
+    retractall(resposta(_,_)),
+    write('Questionário de Trilhas'), nl,
+    write('Responda com s (sim) ou n (não)'), nl,
+    Caracteristicas = [big_data,hadoop,estatistica,
+                       redes,criptografia,firewall,
+                       interface,sites,banco_de_dados,
+                       machine_learning,redes_neurais,linguagem_natural,
+                       lideranca,governanca,gestao_projetos],
+    faz_perguntas(Caracteristicas),
+    melhor(Todas),
+    write('Resultado:'), nl,
+    write('Trilhas recomendadas: '), nl,
+    forall(member(T-D, Todas), (
+        write('- '), write(T), write(': '), write(D), nl,
+        justificativa(T), nl
+    )),
+    write('Ranking completo:'), nl,
+    ranking(R),
+    write(R), nl.
