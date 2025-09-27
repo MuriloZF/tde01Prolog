@@ -17,7 +17,7 @@
 
 - Para rodar, é necessário algum compilador de Prolog (eg: swiprolog)
 
-- Para executar, utilize: swipl -s main.pl (o comando para iniciar pode variar de acordo com o compilador)
+- Para executar, utilize: swipl -s main.pl (o comando para executar pode variar de acordo com o compilador)
 
 - Para começar o questionário, digite: iniciar.
 
