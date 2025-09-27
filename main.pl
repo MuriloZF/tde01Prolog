@@ -46,3 +46,53 @@ pergunta(12, 'Você gostaria entender como os computadores entendem nossa lingua
 pergunta(13, 'Você é uma pessoa que possui uma boa liderança?', lideranca).
 pergunta(14, 'Você tem interesse em aprender sobre governança de TI?', governanca).
 pergunta(15, 'Você tem interesse em gestão de projetos de TI?', gestao_projetos).
+
+:- dynamic resposta/2.
+
+ler_resposta(Resp) :-
+    read(Raw),
+    (Raw == s ; Raw == n), !,
+    Resp = Raw.
+ler_resposta(Resp) :-
+    write('Resposta inválida. Digite s para sim ou n para não: '), nl,
+    ler_resposta(Resp).
+
+
+faz_perguntas([]).
+faz_perguntas([C|Resto]) :-
+    pergunta(_, Texto, C),
+    write(Texto), nl,
+    ler_resposta(Resp),
+    assertz(resposta(C, Resp)),
+    faz_perguntas(Resto).
+
+
+calcula_pontuacao(Trilha, P) :-
+    findall(Peso, (
+        perfil(Trilha, C, Peso),
+        resposta(C, s)
+    ), Lista),
+    sum_list(Lista, P).
+
+
+justificativa(Trilha) :-
+    findall(C-Peso, (
+        perfil(Trilha, C, Peso),
+        resposta(C, s)
+    ), Lista),
+    write('Respostas que contribuíram para esta trilha:'), nl,
+    forall(member(C-P, Lista),
+           (write(' - '), write(C), write(' (peso '), write(P), write(')'), nl)).
+
+
+melhor(Trilhas) :-
+    findall(P-T, (trilha(T,_), calcula_pontuacao(T,P)), Pares),
+    keysort(Pares, Ordenados),
+    reverse(Ordenados, [MaiorPontuacao-_|_]),
+    findall(T-D, (member(MaiorPontuacao-T, Ordenados), trilha(T,D)), Trilhas).
+
+ranking(ListaRanking) :-
+    findall(P-T, (trilha(T,_), calcula_pontuacao(T,P)), Pares),
+    keysort(Pares, Ordenados),
+    reverse(Ordenados, ListaRanking).
+
