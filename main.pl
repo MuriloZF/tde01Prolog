@@ -96,3 +96,24 @@ ranking(ListaRanking) :-
     keysort(Pares, Ordenados),
     reverse(Ordenados, ListaRanking).
 
+
+iniciar :-
+    retractall(resposta(_,_)),
+    write('Questionário de Trilhas'), nl,
+    write('Responda com s (sim) ou n (não)'), nl,
+    Caracteristicas = [big_data,hadoop,estatistica,
+                       redes,criptografia,firewall,
+                       interface,sites,banco_de_dados,
+                       machine_learning,redes_neurais,linguagem_natural,
+                       lideranca,governanca,gestao_projetos],
+    faz_perguntas(Caracteristicas),
+    melhor(Todas),
+    write('Resultado:'), nl,
+    write('Trilhas recomendadas: '), nl,
+    forall(member(T-D, Todas), (
+        write('- '), write(T), write(': '), write(D), nl,
+        justificativa(T), nl
+    )),
+    write('Ranking completo:'), nl,
+    ranking(R),
+    write(R), nl.
