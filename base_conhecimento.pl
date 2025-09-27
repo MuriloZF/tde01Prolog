@@ -1,3 +1,5 @@
+:- module(base_conhecimento, [trilha/2, perfil/3, pergunta/3]).
+
 %Trilhas
 trilha(ciencia_de_dados, 'Estudo de dados para extrair conhecimentos significativos para os negócios').
 trilha(seguranca_da_informacao, 'Proteção de informações importantes contra acesso não autorizado, divulgação, uso, alteração ou interrupção').
