@@ -119,15 +119,15 @@ iniciar :-
     write(R), nl.
 
 
-
+%Perfil com tendencia a Inteligencia artificial
 perfil_teste(1, [big_data-s,hadoop-n,estatistica-s,redes-n,criptografia-n,firewall-n,
           interface-n,sites-n,banco_de_dados-n,machine_learning-s,
           redes_neurais-s,linguagem_natural-n,lideranca-n,governanca-n,gestao_projetos-n]).
-
+%Perfil com tendencia a seguranca da informacao
 perfil_teste(2, [big_data-n,hadoop-n,estatistica-n,redes-s,criptografia-s,firewall-s,
           interface-n,sites-n,banco_de_dados-n,machine_learning-n,
           redes_neurais-n,linguagem_natural-n,lideranca-n,governanca-n,gestao_projetos-n]).
-
+%perfil com tendencia a desenvolvimento web
 perfil_teste(3, [big_data-n,hadoop-n,estatistica-n,redes-n,criptografia-n,firewall-n,
           interface-s,sites-s,banco_de_dados-s,machine_learning-n,
           redes_neurais-n,linguagem_natural-n,lideranca-s,governanca-n,gestao_projetos-n]).
