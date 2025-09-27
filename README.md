@@ -1,4 +1,4 @@
-# tde01Prolog
+# Trabalho De Prolog
 
 ## Grupo:
 - Adryan Costa Silva
