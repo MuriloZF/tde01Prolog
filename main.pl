@@ -1,8 +1,6 @@
 :- use_module(base_conhecimento).
-:- use_module(perfil_teste1).
-:- use_module(perfil_teste2).
-:- use_module(perfil_teste3).
-
+:- multifile perfil_teste/2.
+:- [perfil_teste1, perfil_teste2, perfil_teste3].
 :- dynamic resposta/2. % predicado resposta/2 sera dinamico (pode ser modificado durante execucao) por exemplo o assertz e retract.
 
 ler_resposta(Resp) :- % le um valor digitado que seria resposta e verifica se for s ou n se for ele corta com o "!" e uni Resp = Raw.
@@ -74,3 +72,16 @@ iniciar :-
     write('Ranking completo:'), nl,
     ranking(R),
     write(R), nl.
+
+rodar_teste(Id) :-
+    retractall(resposta(_,_)),
+    perfil_teste(Id, Lista),
+    forall(member(C-R, Lista), assertz(resposta(C,R))),
+    melhor(Todas),
+    nl, write('Teste '), write(Id), write(' -> Trilhas recomendadas:'), nl,
+    forall(member(T-D, Todas), (
+        write('- '), write(T), write(': '), write(D), nl,
+        justificativa(T), nl
+    )),
+    write('Ranking completo:'), nl,
+    ranking(R), write(R), nl.
