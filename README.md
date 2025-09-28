@@ -3,13 +3,13 @@
 ## Curso: Ciência da Computação, PUCPR - 4° semestre
 
 ### Grupo:
-- Adryan Costa Silva
+- Adryan Costa Silva (AdryanCostaSilva)
 
-- Hassan Ali El Gazouini
+- Hassan Ali El Gazouini (haskaz313)
 
-- Hussein Ali El Gazouini
+- Hussein Ali El Gazouini (ItsPoyoyo)
 
-- Murilo Zimerman Fortaleza
+- Murilo Zimerman Fortaleza (MuriloZF)
 
 - ---
 
